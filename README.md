@@ -11,15 +11,15 @@ Just store source code and "make", it searches source code automatically and bui
 ~~~
 git clone https://github.com/tarosuke/vr_core_template.git YOUR_PROJECT
 ~~~
-3. make update (in your project).
+3. "make update" (in your project).
 4. read sample modules to learn how to write code for vr_code (or copy them).
 4. write your code under modules (or somewhere except vr_coce).
 
 ## NOTE
 
-* this template recognize YOUR_PROJECT as project name. project name used as ...
+* this template recognize YOUR_PROJECT as the project name. the project name used as ...
     * filename of executable
-    * prefernce file will be stored ~/.YOUR_PROJECT
+    * preference file will be stored ~/.YOUR_PROJECT
 
 # vr_core_template
 
