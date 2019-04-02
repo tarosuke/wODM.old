@@ -1,2 +1,4 @@
-*.map
+wODM*
 
+/.code-workspace
+/.vscode
