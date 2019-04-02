@@ -9,9 +9,9 @@ Just store source code and "make", it searches source code automatically and bui
 1. Fork this(on GitHub).
 2. Clone forked repository (It's your project).
 ~~~
-git clone https://github.com/tarosuke/vr_core_template.git YOUR_PROJECT
+git clone --recursive https://github.com/tarosuke/vr_core_template.git YOUR_PROJECT
 ~~~
-3. "make update" (in your project).
+3. "make submodule update --init" if you forget "--recursive" (in your project).
 4. read sample modules to learn how to write code for vr_code (or copy them).
 4. write your code under modules (or somewhere except vr_coce).
 
@@ -32,9 +32,9 @@ git clone https://github.com/tarosuke/vr_core_template.git YOUR_PROJECT
 1. (GitHub上で)Forkします。
 2. forkしたプロジェクトをcloneします(これがあなたのプロジェクトになります)。
 ~~~
-git clone https://github.com/tarosuke/vr_core_template.git YOUR_PROJECT)
+git clone --recursive https://github.com/tarosuke/vr_core_template.git YOUR_PROJECT)
 ~~~
-3. cloneしたプロジェクトの中で「make update」します。
+3. 「--recursive」を付け忘れたらcloneしたプロジェクトの中で「make update」します。
 4. vr_coreでの書き方を学ぶためにmoduleの下にあるサンプルを読みます(あるいは適当なサンプルをコピーします)。
 4. modules以下(あるいはvr_core以外のどこか)にコードを書きます。
 
