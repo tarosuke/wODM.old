@@ -1,6 +1,6 @@
 [submodule "vr_core"]
 	path = vr_core
-	url = https://github.com/tarosuke/vr_core.git
+	url = ssh://kafuka//srv/repos/vr_core.git
 [submodule "toolbox"]
 	path = toolbox
-	url = https://github.com/tarosuke/toolbox
+	url = ssh://kafuka//srv/repos/toolbox.git
