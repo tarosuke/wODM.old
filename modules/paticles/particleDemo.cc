@@ -58,7 +58,7 @@ namespace particles{
 
 
 	TB::Prefs<bool> ParticleDemo::enable(
-		"--demo/particles", false, TB::CommonPrefs::nosave);
+		"--demo/particleDemo", false, TB::CommonPrefs::nosave);
 
 
 	FACTORY<vr_core::Module> ParticleDemo::factory(New);
