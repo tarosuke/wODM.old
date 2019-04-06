@@ -35,6 +35,7 @@ deps = $(addsuffix .d, $(dmds))
 ######################################################################## RULES
 
 $(target): makefile $(objs) $(exdeps)
+	@make -j -C toolbox
 	@echo " LD $@" $(LIBOPTS)
 	@gcc  $(CCOPTS) -Xlinker "-Map=$(target).map" -o $@ $(objs) $(LIBOPTS)
 
