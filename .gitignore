@@ -1,4 +1,5 @@
 wODM*
+*.orig
 
 /.code-workspace
 /.vscode
