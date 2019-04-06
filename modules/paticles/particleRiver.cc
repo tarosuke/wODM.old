@@ -30,9 +30,15 @@ namespace particles{
 
 		void UpdateElement(Element& e, float delta) final{
 			Particles::UpdateElement(e, delta);
+			if(e.position.z < -range){
+				e.position.z += range * 2;
+			}
 		};
+
+		static const float range;
 	};
 
+	const float ParticleRiver::range(1000);
 
 	TB::Prefs<bool> ParticleRiver::enable(
 		"--demo/particleRiver", false, TB::CommonPrefs::nosave);
@@ -50,8 +56,6 @@ namespace particles{
 		const TB::Image& sprite,
 		unsigned numOfParticles) :
 		Particles(size, sprite, numOfParticles){
-
-		const float range(1000);
 
 		for(unsigned n(0); n < numOfParticles; ++n){
 			Element& e(elements[n]);

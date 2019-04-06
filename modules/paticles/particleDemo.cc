@@ -29,6 +29,8 @@ namespace particles{
 		};
 
 		void UpdateElement(Element& e, float delta) final{
+			Particles::UpdateElement(e, delta);
+
 			const unsigned id(&e - elements);
 
 			//加減速
@@ -43,9 +45,9 @@ namespace particles{
 				const float ay(dy* a);
 				const float az(dz* a);
 
-				e.velocity.x += ax;
-				e.velocity.y += ay;
-				e.velocity.z += az;
+				e.velocity.x += (ax - (e.position.x)) * delta;
+				e.velocity.y += (ay - (e.position.y)) * delta;
+				e.velocity.z += (az - (e.position.z)) * delta;
 				ee.velocity.x -=ax;
 				ee.velocity.y -= ay;
 				ee.velocity.z -= az;
