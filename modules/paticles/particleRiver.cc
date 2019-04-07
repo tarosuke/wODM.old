@@ -38,7 +38,7 @@ namespace particles{
 		static const float range;
 	};
 
-	const float ParticleRiver::range(10);
+	const float ParticleRiver::range(100);
 
 	TB::Prefs<bool> ParticleRiver::enable(
 		"--demo/particleRiver", false, TB::CommonPrefs::nosave);
