@@ -31,14 +31,14 @@ namespace particles{
 		void UpdateElement(Element& e, float delta) final{
 			Particles::UpdateElement(e, delta);
 			if(e.position.z < -range){
-				e.position.z += range * 2;
+				e.position.z = range;
 			}
 		};
 
 		static const float range;
 	};
 
-	const float ParticleRiver::range(1000);
+	const float ParticleRiver::range(10);
 
 	TB::Prefs<bool> ParticleRiver::enable(
 		"--demo/particleRiver", false, TB::CommonPrefs::nosave);
@@ -46,7 +46,9 @@ namespace particles{
 
 	FACTORY<vr_core::Module> ParticleRiver::factory(New);
 	vr_core::Module* ParticleRiver::New(){
-		//new ParticleRiver(32, new LIGHTBALL, 2000);
+		if(enable){
+			new ParticleRiver(128, LIGHTBALL(), 1);
+		}
 		return 0;
 	}
 
@@ -60,10 +62,10 @@ namespace particles{
 		for(unsigned n(0); n < numOfParticles; ++n){
 			Element& e(elements[n]);
 			e.position.x = R(-range, range);
-			e.position.y = R(-range, range);
+			e.position.y = -1.5;
 			e.position.z = R(-range, range);
 			e.velocity.x = e.velocity.y = 0;
-			e.velocity.z = -0.01;
+			e.velocity.z = -0.1;
 		}
 	}
 
