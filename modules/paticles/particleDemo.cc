@@ -45,9 +45,9 @@ namespace particles{
 				const float ay(dy* a);
 				const float az(dz* a);
 
-				e.velocity.x += (ax - (0.000001 * e.position.x)) * delta;
-				e.velocity.y += (ay - (0.000001 * e.position.y)) * delta;
-				e.velocity.z += (az - (0.000001 * e.position.z)) * delta;
+				e.velocity.x += (ax - (0.00005 * e.position.x)) * delta;
+				e.velocity.y += (ay - (0.00005 * e.position.y)) * delta;
+				e.velocity.z += (az - (0.00005 * e.position.z)) * delta;
 				ee.velocity.x -=ax;
 				ee.velocity.y -= ay;
 				ee.velocity.z -= az;
@@ -88,7 +88,7 @@ namespace particles{
 			const float v(sqrtf(
 				e.velocity.x*e.velocity.x +
 				e.velocity.y*e.velocity.y +
-				e.velocity.z*e.velocity.z) / 256);
+				e.velocity.z*e.velocity.z) / 64);
 			e.velocity.x /= v;
 			e.velocity.y /= v;
 			e.velocity.z /= v;
