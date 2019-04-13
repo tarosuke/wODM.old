@@ -1,6 +1,9 @@
 [submodule "vr_core"]
 	path = vr_core
-	url = ssh://kafuka//srv/repos/vr_core.git
+	url = ssh://kafuka.tarosuke.net/srv/repos/vr_core.git
 [submodule "toolbox"]
 	path = toolbox
-	url = ssh://kafuka//srv/repos/toolbox.git
+	url = ssh://kafuka.tarosuke.net/srv/repos/toolbox.git
+[submodule "modules/wodm/wOLIB"]
+	path = modules/wodm/wOLIB
+	url = ssh://kafuka.tarosuke.net/srv/repos/wOLIB.git

@@ -8,7 +8,7 @@ all: $(target)
 
 ####################################################################### VALUES
 
-COPTS = -Itoolbox/include
+COPTS = -Itoolbox/include -Imodules/wodm/wOLIB/include
 LIBOPTS = -Ltoolbox
 
 COPTS += -Wall -Werror -g -O2 -fno-strict-aliasing -Wno-unused-result -IX11 -Ivr_core/include -DPROJECT_NAME=\"$(target)\"
@@ -36,6 +36,7 @@ deps = $(addsuffix .d, $(dmds))
 
 $(target): makefile $(objs) $(exdeps)
 	@make -j -C toolbox
+	@COPTS="-I../../../toolbox/include -Iinclude" make -j -C modules/wodm/wOLIB
 	@echo " LD $@" $(LIBOPTS)
 	@gcc  $(CCOPTS) -Xlinker "-Map=$(target).map" -o $@ $(objs) $(LIBOPTS)
 
