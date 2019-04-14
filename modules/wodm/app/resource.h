@@ -40,7 +40,7 @@ namespace wodm{
 
 	public:
 		struct Params{
-			App* const app; //App(外部へ通信しない場合はは0を設定する)
+			App& app;
 			unsigned id;
 		};
 
@@ -51,7 +51,6 @@ namespace wodm{
 			unsigned pressed;
 			unsigned released;
 		};
-
 
 		virtual ~Resource();
 
@@ -65,6 +64,7 @@ namespace wodm{
 		/** コンストラクタ
 		 */
 		Resource(const Params&);
+		Resource(App&, unsigned id);
 
 		/** 適切な宛先へ送信
 		 */
@@ -83,6 +83,5 @@ namespace wodm{
 
 	private:
 		const unsigned id;
-		static App dummyApp;
 	};
 }

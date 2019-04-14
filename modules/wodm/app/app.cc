@@ -108,7 +108,7 @@ namespace wodm{
 		//メッセージタイプによる振り分け
 		switch (p.head.type){
 		case wO::Message::widgetCreated:
-			Widget::New(cp);
+			Widget::New(*this, cp);
 			break;
 		case wO::Message::enterProgress:
 			progress++;

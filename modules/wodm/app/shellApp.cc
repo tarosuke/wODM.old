@@ -24,7 +24,6 @@
 #include <module.h>
 
 #include "shellApp.h"
-#include "scenery.h"
 #include "../widget/cursor.h"
 
 
@@ -58,10 +57,10 @@ namespace wodm{
 		case wO::Message::planetCreated:
 			new Planet(params);
 			break;
-#endif
 		case wO::Message::createScenery:
-			new Scenery(p);
+			new Scenery(*this, wO::Scenery::Pack(m));
 			break;
+#endif
 		case wO::Message::spawn: //プロセス起動
 			syslog(LOG_INFO,"spawn:%s", p.body);
 			if(p.body[0]){

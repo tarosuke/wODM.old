@@ -16,25 +16,17 @@
  * Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-#pragma once
-
-#include <wOLIB/widget.h>
-
-#include "../app/resource.h"
+#include "widget.h"
+#include "../app/app.h"
 
 
 
 namespace wodm{
 
-	/** wODM::Widget series Factory
-	 */
-	class Widget{
-	public:
-
-		static Widget* New(
-			class App&,
-			const wO::Widget::CommandPack&);
-
-	};
+	Widget* Widget::New(
+		App& app,
+		const wO::Widget::CommandPack& p){
+		return 0;
+	}
 
 }

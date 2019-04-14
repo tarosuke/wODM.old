@@ -1,4 +1,4 @@
-/** 背景インターフェイス
+/** cursor
  * Copyright (C) 2019 tarosuke<webmaster@tarosuke.net>
  *
  * This program is free software; you can redistribute it and/or
@@ -16,28 +16,22 @@
  * Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-#pragma once
-
-#include <toolbox/image.h>
-
-#include <scenery.h>
-
-#include "resource.h"
+#include "cursor.h"
 
 
 
 namespace wodm{
 
-	class Scenery : public Resource{
-	public:
+	void Cursor::EnterProgress(){
 
-		Scenery(const wO::Message::Pack&);
+	}
+	void Cursor::ExitProgress(){
 
-	private:
-		void OnMessage(wO::Message&) final;
+	}
 
-		TB::Image image;
-		vr_core::Scenery* scenery; //Imageが揃ってからしかnewできないので
-	};
+	void CursorSet::New(const wO::Cursor::Pack& p){
+
+	}
+
 
 }

@@ -32,8 +32,14 @@ namespace wodm{
 	 */
 	Resource::Resource(const Params& p) :
 		TB::List<Resource>::Node(true),
-		comm(p.app ? *p.app : dummyApp),
+		comm(p.app),
 		id(p.id){
+		comm.Register(id, *this);
+	}
+	Resource::Resource(App& app, unsigned id) :
+		TB::List<Resource>::Node(true),
+		comm(app),
+		id(id){
 		comm.Register(id, *this);
 	}
 	Resource::~Resource(){
