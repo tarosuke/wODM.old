@@ -18,6 +18,8 @@
  */
 #pragma once
 
+#include <widget.h>
+
 #include <wOLIB/widget.h>
 
 #include "../app/resource.h"
@@ -28,13 +30,28 @@ namespace wodm{
 
 	/** wODM::Widget series Factory
 	 */
-	class Widget{
+	class Widget : public Resource{
 	public:
+		struct Param{
+			App& app;
+			vr_core::Widget* parent;
+			const wO::Widget::CommandPack& pack;
+			int x;
+			int y;
+			int z;
+			unsigned w;
+			unsigned h;
+			unsigned attr;
+		};
 
 		static Widget* New(
 			class App&,
+			vr_core::Widget* parent,
 			const wO::Widget::CommandPack&);
 
+	protected:
+		Widget(App&, unsigned id);
+		static unsigned VRWAttr(unsigned);
 	};
 
 }
