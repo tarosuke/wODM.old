@@ -19,14 +19,70 @@
 #include "widget.h"
 #include "../app/app.h"
 
+#include <texturedWidget.h>
+
 
 
 namespace wodm{
 
-	Widget* Widget::New(
+	// r_coreの各種Widgetに対応したwODM対応Widget
+	template<class W> class SomeWidget : public W, public Widget{
+	public:
+		SomeWidget(const Param& p) :
+			W(p.parent, p.x, p.y, p.w, p.h,
+				VRWAttr(p.attr)),
+			Widget(p.app, p.pack.head.id){};
+
+	private:
+		void OnMessage(wO::Message&) final{
+
+		};
+
+	};
+
+
+	Widget* Widget::Widget::New(
 		App& app,
-		const wO::Widget::CommandPack& p){
+		vr_core::Widget* parent,
+		const wO::Widget::CommandPack& pack){
+
+		const Param p = {
+			app: app,
+			parent: parent,
+			pack: pack,
+			x: pack.left,
+			y: pack.top,
+			z: pack.depth,
+			w: pack.width,
+			h: pack.height,
+		};
+
+		if(p.pack.attributes & wO::Widget::hasContent){
+			//中身あり
+			new SomeWidget<vr_core::TexturedWidget>(p);
+        }else if(p.pack.attributes & wO::Widget::hasBorder){
+			//境界あり
+			new SomeWidget<vr_core::BorderWidget>(p);
+        }else if(p.pack.attributes & wO::Widget::hasPosition){
+			//位置のみ
+			new SomeWidget<vr_core::PositionWidget>(p);
+        }
 		return 0;
+	}
+
+
+	Widget::Widget(App& app, unsigned id) :
+		Resource(app, id){}
+
+	unsigned Widget::VRWAttr(unsigned woAttr){
+		unsigned attr(0);
+
+		// フォーカスしない
+		if(woAttr & wO::Widget::noFocusMe){
+			attr |= vr_core::Widget::noFocus;
+		}
+
+		return attr;
 	}
 
 }

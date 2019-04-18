@@ -92,7 +92,7 @@ namespace wodm{
 				(*a).OnMessage(*m);
 				delete m;
 
-				//処理数文だけ処理したら終了(ただし最低１つは処理)
+				//処理数分だけ処理したら終了(ただし最低１つは処理)
 				if(!bingo--){
 					return false;
 				}
@@ -108,7 +108,11 @@ namespace wodm{
 		//メッセージタイプによる振り分け
 		switch (p.head.type){
 		case wO::Message::widgetCreated:
-			Widget::New(*this, cp);
+			{
+				auto parent(
+					dynamic_cast<vr_core::Widget*>(array[cp.parent]));
+				Widget::New(*this, parent, cp);
+			}
 			break;
 		case wO::Message::enterProgress:
 			progress++;
