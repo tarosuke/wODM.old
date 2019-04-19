@@ -17,6 +17,9 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 #include "widget.h"
+
+#include <syslog.h>
+
 #include "../app/app.h"
 
 #include <texturedWidget.h>
@@ -34,8 +37,50 @@ namespace wodm{
 			Widget(p.app, p.pack.head.id){};
 
 	private:
-		void OnMessage(wO::Message&) final{
-
+		void OnMessage(wO::Message& m) final{
+			wO::Widget::CommandPack& pack(m);
+			switch(pack.head.type){
+			case wO::Message::moveTo:
+				vr_core::PositionWidget::MoveTo(
+					pack.left, pack.top, pack.depth);
+				break;
+			case wO::Message::jumpTo:
+				vr_core::PositionWidget::JumpTo(
+					pack.left, pack.top, pack.depth);
+				break;
+			case wO::Message::move:
+				vr_core::PositionWidget::Move(
+					pack.left, pack.top, pack.depth);
+				break;
+			case wO::Message::jump:
+				vr_core::PositionWidget::Jump(
+					pack.left, pack.top, pack.depth);
+				break;
+#if 0
+			case wO::Message::focus:
+				Focused(*this);
+				break;
+			case wO::Message::pick:
+				Pick();
+				break;
+			case wO::Message::show:
+				visible = true;
+				Pick();
+				break;
+			case wO::Message::hide:
+				visible = false;
+				ReDepth();
+				break;
+#endif
+			default:
+				syslog(
+					LOG_WARNING,
+					"--unknown(%x:%08x)--\n",
+					pack.head.type,
+					pack.head.id);
+//                m.Dump();
+				break;
+			}
 		};
 
 	};
