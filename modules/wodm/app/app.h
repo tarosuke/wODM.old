@@ -30,17 +30,49 @@
 
 namespace wodm{
 
-	class Resource;
-
-
 	/** Appインターフェイス
-	 * あるいはダミーのApp
 	 */
 	class App{
 		App(const App&);
 		void operator=(const App&);
 	public:
+		//Resource
+		class Resource : public TB::List<Resource>::Node{
+			Resource();
+		public:
+			virtual ~Resource();
 
+			/** メッセージ処理ハンドラ
+			 */
+			virtual void OnMessage(wO::Message&)=0;
+
+		protected:
+			App& comm;
+
+			/** コンストラクタ
+			 */
+			Resource(App&, unsigned id);
+
+			/** 適切な宛先へ送信
+			 */
+			void Send(wO::Message&);
+			void SendEvent(
+				wO::Message::Types, int x, int y,
+				unsigned buttonState = 0,
+				unsigned pressed = 0,
+				unsigned released = 0);
+			void SendEvent(wO::Message::Types);
+
+			/** ID取得
+			 */
+			unsigned GetID(){ return id; };
+
+		private:
+			const unsigned id;
+		};
+
+		/** App自体のメソッド
+		 */
 		App(){};
 		virtual ~App(){};
 

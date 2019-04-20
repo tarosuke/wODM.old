@@ -20,9 +20,9 @@
 
 #include <wOLIB/message.h>
 #include <wOLIB/debug.h>
+#include <wOLIB/widget.h>
 
 #include "../app/app.h"
-#include "resource.h"
 
 
 
@@ -30,19 +30,13 @@ namespace wodm{
 
 	/** コンストラクタとデストラクタ
 	 */
-	Resource::Resource(const Params& p) :
-		TB::List<Resource>::Node(true),
-		comm(p.app),
-		id(p.id){
-		comm.Register(id, *this);
-	}
-	Resource::Resource(App& app, unsigned id) :
+	App::Resource::Resource(App& app, unsigned id) :
 		TB::List<Resource>::Node(true),
 		comm(app),
 		id(id){
 		comm.Register(id, *this);
 	}
-	Resource::~Resource(){
+	App::Resource::~Resource(){
 		comm.Detach(id, *this);
 	}
 
@@ -50,7 +44,7 @@ namespace wodm{
 	/** メッセージ送信
 	 * 宛先はアプリケーション側の対応するResource
 	 */
-	void Resource::Send(wO::Message& m){
+	void App::Resource::Send(wO::Message& m){
 		m.GetContent().head.id = id;
 		comm.Send(m);
 	}
@@ -60,7 +54,7 @@ namespace wodm{
 	 * 画面側なのでイベントに対応したメッセージを生成する
 	 */
 	//ポインタ系
-	void Resource::SendEvent(
+	void App::Resource::SendEvent(
 		wO::Message::Types type,
 		int x, int y,
 		unsigned buttonState,
@@ -77,17 +71,7 @@ namespace wodm{
 		wO::Message m((wO::Message::Pack*)&p);
 		Send(m);
 	}
-	void Resource::SendEvent(
-		wO::Message::Types type,
-		const MouseParams& params){
-		SendEvent(
-			type,
-			params.x, params.y,
-			params.state,
-			params.pressed,
-			params.released);
-	}
-	void Resource::SendEvent(wO::Message::Types type){
+	void App::Resource::SendEvent(wO::Message::Types type){
 		wO::HeadMessage m(type);
 		Send(m);
 	}

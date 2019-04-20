@@ -28,7 +28,6 @@
 #include <wOLIB/message.h>
 #include <wOLIB/widget.h>
 
-#include "resource.h"
 #include "../widget/widget.h"
 #include "../widget/cursor.h"
 

@@ -22,7 +22,7 @@
 
 #include <wOLIB/widget.h>
 
-#include "../app/resource.h"
+#include "../app/app.h"
 
 
 
@@ -30,7 +30,7 @@ namespace wodm{
 
 	/** wODM::Widget series Factory
 	 */
-	class Widget : public Resource{
+	class Widget : public App::Resource{
 	public:
 		struct Param{
 			App& app;
