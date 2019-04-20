@@ -20,6 +20,7 @@
 
 #include <widget.h>
 
+#include <wOLIB/message.h>
 #include <wOLIB/widget.h>
 
 #include "../app/app.h"
@@ -50,8 +51,14 @@ namespace wodm{
 			const wO::Widget::CommandPack&);
 
 	protected:
-		Widget(App&, unsigned id);
 		static unsigned VRWAttr(unsigned);
+		Widget(App&, unsigned id);
+		void SendEvent(
+			wO::Message::Types,
+			const vr_core::Widget::MouseEvent&);
+		void SendEvent(
+			wO::Message::Types,
+			const vr_core::Widget::KeyEvent&);
 	};
 
 }

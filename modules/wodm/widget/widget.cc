@@ -83,8 +83,54 @@ namespace wodm{
 			}
 		};
 
+		void OnMouseEnter(const vr_core::Widget::MouseEvent& e) final{
+			SendEvent(wO::Message::onMouseEnter, e);
+		};
+		void OnMouseMove(const vr_core::Widget::MouseEvent& e) final{
+			SendEvent(wO::Message::onMouseMove, e);
+		};
+		void OnMouseLeave(const vr_core::Widget::MouseEvent& e) final{
+			SendEvent(wO::Message::onMouseLeave, e);
+		};
+		void OnButtonDown(const vr_core::Widget::MouseEvent& e) final{
+			SendEvent(wO::Message::onMouseButton, e);
+		};
+		void OnButtonUp(const vr_core::Widget::MouseEvent& e) final{
+			SendEvent(wO::Message::onMouseButton, e);
+		};
+		void OnKeyDown(const vr_core::Widget::KeyEvent& e) final{
+			SendEvent(wO::Message::onKeyDown, e);
+		};
+		void OnKeyUp(const vr_core::Widget::KeyEvent& e) final{
+			SendEvent(wO::Message::onKeyUp, e);
+		};
+		void OnKeyRepeat(const vr_core::Widget::KeyEvent& e) final{
+			SendEvent(wO::Message::onKeyRepeat, e);
+		};
+
 	};
 
+	void Widget::SendEvent(
+		wO::Message::Types type,
+		const vr_core::Widget::MouseEvent& e){
+		App::Resource::SendEvent(
+			type,
+			e.x,
+			e.y,
+			e.buttonState,
+			e.pressedButton,
+			e.releasedButton);
+	}
+	void Widget::SendEvent(
+		wO::Message::Types type,
+		const vr_core::Widget::KeyEvent& e){
+		wO::Widget::KeyPack p;
+		p.modifiers = e.modifiers;
+		p.keyCode = e.keyCode;
+		p.charCode = e.charCode;
+		wO::Message m((wO::Message::Pack*)&p);
+		Send(m);
+	}
 
 	Widget* Widget::Widget::New(
 		App& app,
